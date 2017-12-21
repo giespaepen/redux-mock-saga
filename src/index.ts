@@ -1,0 +1,81 @@
+import { applyMiddleware, createStore, Store } from "redux";
+import createSagaMiddleware, { END, SagaMiddleware } from "redux-saga";
+import { fork } from "redux-saga/effects";
+
+export type ReduxSagaMock = { mockStore: Store<any>, mockSagaMiddleWare: SagaMiddleware<{}> };
+
+/**
+ * This factory creates a mocked store object object and an instance
+ * of the saga middleware.
+ *
+ * @param {*} rootReducer
+ * @param {*} store
+ */
+export function mockStoreFactory(rootReducer: any, store: Store<any>, state?: any): ReduxSagaMock {
+    // Create a root saga and middleware
+    const mockSagaMiddleWare: SagaMiddleware<any> = createSagaMiddleware();
+
+    // Create the store and provide the following elements:
+    const mockStore: Store<any> = createStore(
+        // 1) the root reducer, a barrel of all individual reducers of every state property
+        rootReducer,
+
+        // 2) the initial state of the application (an empty object)
+        state || {},
+
+        // 3) compose store enhancers consisting of:
+        applyMiddleware(mockSagaMiddleWare),
+    );
+
+    attachMockedStore(store, mockStore);
+
+    // The constructed store is exported. So if you import the store you get the concrete
+    // instance.
+    return { mockStore, mockSagaMiddleWare };
+}
+
+/**
+ * It happens to be that sagas use yield select(state => state.x) statements, thus using
+ * the real store. This function attaches the mocked store to the real functions via jest
+ * mock APIs.
+ *
+ * @param {*} store
+ * @param {*} mockStore
+ */
+function attachMockedStore(store: Store<any>, mockStore: Store<any>): void {
+    store.getState = jest.fn().mockImplementation(mockStore.getState);
+    store.dispatch = jest.fn().mockImplementation(mockStore.dispatch);
+    store.subscribe = jest.fn().mockImplementation((listener) => { mockStore.subscribe(listener); });
+    store.replaceReducer = jest.fn().mockImplementation((next: any) => { mockStore.replaceReducer(next); });
+}
+
+/**
+ * Sagas always start with a root saga where all the other sagas are forked.
+ * @param {*} sagas
+ */
+export function createMockRootSaga(...sagas: any[]): any {
+    return function* rootSaga() {
+        yield [...sagas.map((x) => fork(x))];
+    };
+}
+
+/**
+ * Run the sagas against the configured mock saga middleware. Return the done promise to await
+ * in your tests.
+ *
+ * @param mock
+ * @param sagas
+ */
+export function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Promise<any> {
+    return mock.mockSagaMiddleWare.run(createMockRootSaga(...sagas)).done;
+}
+
+/**
+ * Stop a saga mock by dispatching the END signal. Don't forget to await the promise returned
+ * in runSagaMock.
+ *
+ * @param mock
+ */
+export function stopSagaMock(mock: ReduxSagaMock): void {
+    mock.mockStore.dispatch(END);
+}

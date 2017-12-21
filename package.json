@@ -1,0 +1,36 @@
+{
+  "name": "redux-mock-saga",
+  "version": "0.1.0",
+  "description": "Mock library to thoroughly test redux-sagas",
+  "main": "./lib/index.js",
+  "typings": "./lib/index.d.ts",
+  "scripts": {
+    "build-watch": "yarn tsc --watch",
+    "build": "yarn tsc && yarn generate-flowtypes",
+    "generate-flowtypes": "flowgen lib/index.d.ts -o flow-typed/index.flow.js",
+    "prepublishOnly": "yarn build",
+    "test": "jest"
+  },
+  "keywords": [
+    "redux-saga",
+    "test",
+    "redux"
+  ],
+  "author": "Gie Spaepen <giespaepen@outlook.com>",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^21.2.1",
+    "redux": "^3.7.2",
+    "redux-saga": "^0.16.0"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.1.6",
+    "@types/jest": "^21.1.8",
+    "@types/react": "^16.0.31",
+    "@types/redux-saga": "^0.10.5",
+    "flowgen": "^1.2.0",
+    "tslint": "^5.8.0",
+    "tslint-microsoft-contrib": "^5.0.1",
+    "typescript": "^2.6.2"
+  }
+}

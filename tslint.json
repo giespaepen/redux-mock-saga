@@ -1,0 +1,17 @@
+{
+    "extends": "tslint:recommended",
+    "rulesDirectory": [
+        "./node_modules/tslint-microsoft-contrib"
+    ],
+    "rules": {
+        "interface-over-type-literal": false,
+        "max-line-length": [
+            true,
+            140
+        ],
+        "curly": [
+            true,
+            "ignore-same-line"
+        ]
+    }
+}
