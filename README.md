@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/giespaepen/redux-mock-saga.svg?branch=master)](https://travis-ci.org/giespaepen/redux-mock-saga)
+
 # Redux-Saga-Mock
 > Elegant testing strategy to check what your saga's really do, i.e. testing the result of the side effects.
 

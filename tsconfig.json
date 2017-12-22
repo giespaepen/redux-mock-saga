@@ -27,4 +27,7 @@
     "include": [
         "src/**/*.ts"
     ],
+    "exclude": [
+        "**/__tests__/*.*"
+    ]
 }
