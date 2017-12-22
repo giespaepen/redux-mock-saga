@@ -1,0 +1,36 @@
+language: node_js
+node_js:
+- '8'
+sudo: required
+before_install:
+- sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+- echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+- sudo apt-get update -qq
+- sudo apt-get install -y -qq yarn
+cache:
+  yarn: true
+install:
+- yarn install
+script:
+- yarn test
+- yarn prepublishOnly
+deploy:
+  provider: npm
+  skip_cleanup: true
+  api_key:
+    secure: tWUN3xSBi3ZQGd7oYJL27JQoFftNOQJ4ThzELlZnjCROpbzNVrxA7VOuw8J8p+GpiEYPKtlMHUJsCjmzs0zMGzoiYG80rhJCwEVYUhkr7Typkodq5AEyDeJzt4jLHaFdDcTcxDE8zG9UpW8xVAS6KUunHCb+7ZDq1zwCg69uCqzjNXznNmEvbeJ4oPZO49y/1CK//SKaHJLTLYPjPJnu6tSIDV7H3mBQZIXbAM6vb2a4RMposow7rJdHL3QF7o1QqzsgXBwu2xdSVR6FQ1dAdsWTDQ1axKkVbbCU1kXhdian3zLxu62nmxqOSok7cDxdgSy9fhFVtATd+06QYyT8RMc+ZJ1YcDQP/vKrpZfG479ssX8Vpqp+LTNNzuVg2iPFexiQ4V0kjsDcNJ1W25Ph79ZoNy48DbP/f3RiYD1lRPvu2x2dfettIA0U8ylDYT4u8ubsrq9gJ2Vkio5uczieFcgAND/LjjmhZ9jDp6NkEGezRFAGYwuzAaUxI2gmsKEEh0pSq1CIJsINHOX1YuUIq5z8AR+N2g5aFalIxOPsOC5HTiozO8jrzabOf/Yl7+gspfwDiZeJozvsu15rVTLhg+CPc04JTpDgKPc8T/EuUu74RTCQDPS0/GwmXPzGDIkoE/QQZmkzw+GbwYl89eIYb/JbXaePQo2Kb0nGSPo9jME=
+  email:
+    secure: A61AtF0L8AUEZ2zrTqLPDHGJg43CXPXaKQKU+ZKbLhuCMUVrls8oQmsajwsP6Kdf4DUZt/p/jHiB2uTKJoafUNTxBM7ex/W6aRlE/zHsnWAC3UOwNAPsp/liV3k0q29F6ncXhNy5Bkvu4cP2/GIw4hQBq2ykcwAHG1ghKP/9DXofnnfDCMoNzK9XSpyY/kD8DvRsgaq73dVB0//LtV5ao/cwPCPt1uSgUCP/8hvfDoQG8zSReJ6ILTiFPArZ5V12u/bsuVWoowkGL5hVXPgDvB9vTrOyeqYP0nfm4kMJTG6d7xBPzs+E87GPhhHLz6yGq/mEWsaQYIRGOPZ7e9BN9gZMF9NEDA6oA81a7hC+4L7hPrX96KNaUvuUjc6ZxHUZB4vhiUBVCuPa0IQbEVA5Bb+VSSfY3HBVnzB3zMlT2/SZEJD4XH9gPLglyqqF0p48DmNM2e8GcPb+qai3k6pGuoqQFBgFL0PZOEA/ZRRVp8XQJcWv/+M+akVbWmxkmeUa6EOIA+KE/SdmfOUoJxRlBdSbyJEBtzCdQlY7WxCU57YA0Q/KAD/eNmHbdeIIcZ0RAoMnM5+XKlLRuBqTRsR4jQgcQibE0mTmsUTsgaP2IfpMLXuvcwmRs3bkhHBNjxyHHxoUn6K+RogXUHcR8hDAFeyEI9lk+2aGY5OmYAZgNz8=
+  tag: beta
+  on:
+    branch: master
+
+notifications:
+  recipients:
+    - giespaepen@outlook.com
+  email:
+    on_success: always
+    on_failure: always
+  on:
+    branch: master
+

@@ -12,6 +12,10 @@ export type ReduxSagaMock = { mockStore: Store<any>, mockSagaMiddleWare: SagaMid
  * @param {*} store
  */
 export function mockStoreFactory(rootReducer: any, store: Store<any>, state?: any): ReduxSagaMock {
+    if (!rootReducer || !store) {
+        throw new Error("rootReducer and store must be defined");
+    }
+
     // Create a root saga and middleware
     const mockSagaMiddleWare: SagaMiddleware<any> = createSagaMiddleware();
 
@@ -67,6 +71,10 @@ export function createMockRootSaga(...sagas: any[]): any {
  * @param sagas
  */
 export function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Promise<any> {
+    if (!mock) {
+        throw new Error("mock should be defined");
+    }
+
     return mock.mockSagaMiddleWare.run(createMockRootSaga(...sagas)).done;
 }
 
@@ -77,5 +85,9 @@ export function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Promise<any> 
  * @param mock
  */
 export function stopSagaMock(mock: ReduxSagaMock): void {
+    if (!mock) {
+        throw new Error("mock should be defined");
+    }
+
     mock.mockStore.dispatch(END);
 }
