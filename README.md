@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/giespaepen/redux-mock-saga.svg?branch=master)](https://travis-ci.org/giespaepen/redux-mock-saga)
-[![Dependencies](https://david-dm.org/giespaepen/redux-mock-saga)](https://david-dm.org/giespaepen/redux-mock-saga.svg)
+[![Dependencies](https://david-dm.org/giespaepen/redux-mock-saga.svg)](https://david-dm.org/giespaepen/redux-mock-saga)
 [![NPM Version](https://badge.fury.io/js/redux-mock-saga.svg)](https://badge.fury.io/js/redux-mock-saga)
 
 # Redux-Saga-Mock
