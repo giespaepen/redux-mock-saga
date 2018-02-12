@@ -3,7 +3,7 @@
 [![NPM Version](https://badge.fury.io/js/redux-mock-saga.svg)](https://badge.fury.io/js/redux-mock-saga)
 [![codecov](https://codecov.io/gh/giespaepen/redux-mock-saga/branch/master/graph/badge.svg)](https://codecov.io/gh/giespaepen/redux-mock-saga)
 
-# Redux-Saga-Mock
+# redux-mock-saga
 > Elegant testing strategy to check what your saga's really do, i.e. testing the result of the side effects.
 
 ## Why?
@@ -28,7 +28,7 @@ What do you need?
 
 ```javascript
 
-import { mockStoreFactory, ReduxSagaMock, runSagaMock, stopSagaMock } from "redux-saga-mock";
+import { mockStoreFactory, ReduxSagaMock, runSagaMock, stopSagaMock } from "redux-mock-saga";
 
 describe("some saga", () => {
     // Declare test-wide variables
