@@ -35,7 +35,9 @@ export function mockStoreFactory(rootReducer: any, store: Store<any>, state?: an
             // Custom middleware to log the actions
             function logHistory({ getState }) {
                 return (next) => (action) => {
-                    actionHistory.push(action);
+                    if (action.type && action.type.indexOf("@@redux-saga") === -1) {
+                        actionHistory.push(action);
+                    }
                     return next(action);
                 };
             },
