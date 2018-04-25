@@ -8,7 +8,8 @@
 
 declare export type ReduxSagaMock = {
     mockStore: Store<any>,
-    mockSagaMiddleWare: SagaMiddleware<{} >
+    mockSagaMiddleWare: SagaMiddleware<{}>,
+    actionHistory: Action[]
 };
 /**
  * This factory creates a mocked store object object and an instance

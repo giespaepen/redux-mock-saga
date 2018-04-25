@@ -1,8 +1,9 @@
-import { Store } from "redux";
+import { Action, Store } from "redux";
 import { SagaMiddleware } from "redux-saga";
 export declare type ReduxSagaMock = {
     mockStore: Store<any>;
     mockSagaMiddleWare: SagaMiddleware<{}>;
+    actionHistory: Action[];
 };
 /**
  * This factory creates a mocked store object object and an instance
