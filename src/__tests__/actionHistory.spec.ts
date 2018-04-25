@@ -37,8 +37,6 @@ describe("actionHistory", () => {
         await done;
 
         // Assert
-        // tslint:disable-next-line:no-console
-        console.log(mock.actionHistory);
         expect(mock.actionHistory.length).toBe(2);
         expect(mock.actionHistory.filter((x) => x.type === expected).length).toBe(1);
     });
