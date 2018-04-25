@@ -1,8 +1,8 @@
-import { applyMiddleware, createStore, Store } from "redux";
+import { Action, applyMiddleware, createStore, Store } from "redux";
 import createSagaMiddleware, { END, SagaMiddleware } from "redux-saga";
 import { fork } from "redux-saga/effects";
 
-export type ReduxSagaMock = { mockStore: Store<any>, mockSagaMiddleWare: SagaMiddleware<{}> };
+export type ReduxSagaMock = { mockStore: Store<any>, mockSagaMiddleWare: SagaMiddleware<{}>, actionHistory: Action[] };
 
 /**
  * This factory creates a mocked store object object and an instance
@@ -16,6 +16,9 @@ export function mockStoreFactory(rootReducer: any, store: Store<any>, state?: an
         throw new Error("rootReducer and store must be defined");
     }
 
+    // Create the action history
+    const actionHistory: Action[] = [];
+
     // Create a root saga and middleware
     const mockSagaMiddleWare: SagaMiddleware<any> = createSagaMiddleware();
 
@@ -28,14 +31,24 @@ export function mockStoreFactory(rootReducer: any, store: Store<any>, state?: an
         state || {},
 
         // 3) compose store enhancers consisting of:
-        applyMiddleware(mockSagaMiddleWare),
+        applyMiddleware(
+            // Custom middleware to log the actions
+            function logHistory({ getState }) {
+                return (next) => (action) => {
+                    actionHistory.push(action);
+                    return next(action);
+                };
+            },
+            // The mocked saga middleware
+            mockSagaMiddleWare,
+        ),
     );
 
     attachMockedStore(store, mockStore);
 
     // The constructed store is exported. So if you import the store you get the concrete
     // instance.
-    return { mockStore, mockSagaMiddleWare };
+    return { mockStore, mockSagaMiddleWare, actionHistory };
 }
 
 /**
@@ -59,7 +72,10 @@ function attachMockedStore(store: Store<any>, mockStore: Store<any>): void {
  */
 export function createMockRootSaga(...sagas: any[]): any {
     return function* rootSaga() {
-        yield [...sagas.map((x) => fork(x))];
+        yield [
+
+            ...sagas.map((x) => fork(x)),
+        ];
     };
 }
 
