@@ -63,6 +63,7 @@ The `mockStoreFactory` returns an ReduxSagaMock object containing:
 
 - `mockSagaMiddleware`: Mocked saga middleware.
 - `mockStore`: the mocked store object. Use this object to get the state `mockStore.getState()` to assert state changes
+- `actionHistory`: an array of dispatched actions in order of dispatching
 
 Then you start testing sagas. Also remark that the test method should be **async**! There are a few obligatory things in a test. First you should start the sagas to test via `runSagaMock`. Provide the factory-generated mock `sagaMock` and the saga (worker) you want to test. You get a promise in return. Read on.
 
