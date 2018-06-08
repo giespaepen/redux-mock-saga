@@ -106,6 +106,5 @@ export function stopSagaMock(mock: ReduxSagaMock): void {
     if (!mock) {
         throw new Error("mock should be defined");
     }
-
-    mock.mockStore.dispatch(END);
+    setTimeout(() => mock.mockStore.dispatch(END), 250);
 }
