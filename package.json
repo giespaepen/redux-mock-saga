@@ -1,6 +1,6 @@
 {
   "name": "redux-mock-saga",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Mock library to thoroughly test redux-sagas",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -13,7 +13,8 @@
     "build": "yarn tsc && yarn generate-flowtypes",
     "generate-flowtypes": "flowgen lib/index.d.ts -o flow-typed/index.flow.js",
     "prepublishOnly": "yarn build",
-    "test": "jest --config jest.config.js --no-cache && codecov -f coverage/*.json -t fbf0fd97-eaa0-4700-a62e-28ec14665604"
+    "test:jest": "jest --config jest.config.js --no-cache",
+    "test": "yarn test:jest && codecov -f coverage/*.json -t fbf0fd97-eaa0-4700-a62e-28ec14665604"
   },
   "keywords": [
     "redux-saga",
@@ -24,7 +25,7 @@
   "license": "MIT",
   "dependencies": {
     "redux": "4.0.4",
-    "redux-saga": "^1.1.1"
+    "redux-saga": "1.1.1"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.6",

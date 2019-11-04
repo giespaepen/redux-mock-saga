@@ -1,6 +1,6 @@
 import { Action, applyMiddleware, createStore, Store } from "redux";
-import createSagaMiddleware, { END, SagaMiddleware } from "redux-saga";
-import { fork } from "redux-saga/effects";
+import createSagaMiddleware, { END, SagaMiddleware, Task } from "redux-saga";
+import { all, fork } from "redux-saga/effects";
 
 export type ReduxSagaMock = { mockStore: Store<any>, mockSagaMiddleWare: SagaMiddleware<{}>, actionHistory: Action[] };
 
@@ -74,10 +74,9 @@ function attachMockedStore(store: Store<any>, mockStore: Store<any>): void {
  */
 export function createMockRootSaga(...sagas: any[]): any {
     return function* rootSaga() {
-        yield [
-
+        yield all([
             ...sagas.map((x) => fork(x)),
-        ];
+        ]);
     };
 }
 
@@ -88,12 +87,12 @@ export function createMockRootSaga(...sagas: any[]): any {
  * @param mock
  * @param sagas
  */
-export function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Promise<any> {
+export function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Task {
     if (!mock) {
         throw new Error("mock should be defined");
     }
 
-    return mock.mockSagaMiddleWare.run(createMockRootSaga(...sagas)).toPromise();
+    return mock.mockSagaMiddleWare.run(createMockRootSaga(...sagas));
 }
 
 /**

@@ -1,4 +1,4 @@
-import { mockStoreFactory, ReduxSagaMock, runSagaMock, stopSagaMock } from "../index";
+import { mockStoreFactory, ReduxSagaMock, runSagaMock, stopSagaMock } from "..";
 import testReducer from "./testReducer";
 import { watcher } from "./testSaga";
 import testStore from "./testStore";
@@ -11,7 +11,7 @@ describe("stopSagaMock", () => {
 
         // Act
         const done = runSagaMock(mock, watcher);
-        done.then(() => { expected = true; });
+        done.toPromise().then(() => { expected = true; });
 
         stopSagaMock(mock);
         await done;

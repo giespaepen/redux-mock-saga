@@ -1,4 +1,4 @@
-import { mockStoreFactory, ReduxSagaMock, runSagaMock, stopSagaMock } from "../index";
+import { mockStoreFactory, ReduxSagaMock, runSagaMock, stopSagaMock } from "..";
 import testReducer from "./testReducer";
 import { ACTION, watcher } from "./testSaga";
 import testStore from "./testStore";
@@ -11,12 +11,12 @@ describe("full tests", () => {
 
         // Act
         const done = runSagaMock(mock, watcher);
-        done.then(() => { expected = true; });
+        done.toPromise().then(() => { expected = true; });
 
         mock.mockStore.dispatch({ type: ACTION });
 
         stopSagaMock(mock);
-        await done;
+        await done.toPromise();
 
         // Assert
         expect(done).not.toBeNull();
@@ -31,13 +31,13 @@ describe("full tests", () => {
 
         // Act
         const done = runSagaMock(mock, watcher);
-        done.then(() => { expected = true; });
+        done.toPromise().then(() => { expected = true; });
 
         mock.mockStore.dispatch({ type: ACTION });
         mock.mockStore.dispatch({ type: ACTION });
 
         stopSagaMock(mock);
-        await done;
+        await done.toPromise();
 
         // Assert
         expect(done).not.toBeNull();
