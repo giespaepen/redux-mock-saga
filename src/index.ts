@@ -93,7 +93,7 @@ export function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Promise<any> 
         throw new Error("mock should be defined");
     }
 
-    return mock.mockSagaMiddleWare.run(createMockRootSaga(...sagas)).done;
+    return mock.mockSagaMiddleWare.run(createMockRootSaga(...sagas)).toPromise();
 }
 
 /**

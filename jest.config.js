@@ -1,8 +1,8 @@
-{
+module.exports = {
     "globals": {
         "ts-jest": {
-            "tsConfigFile": "tsconfig.json",
-            "skipBabel": true
+            "tsConfig": "tsconfig.json",
+            "babelConfig": false
         }
     },
     "collectCoverage": true,
@@ -17,7 +17,7 @@
         "\\.d\\.ts"
     ],
     "transform": {
-        "^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+        "^.+\\.tsx?$": "ts-jest"
     },
     "testPathIgnorePatterns": [
         "/node_modules/",
@@ -31,4 +31,4 @@
         "tsx",
         "js"
     ]
-}
+};

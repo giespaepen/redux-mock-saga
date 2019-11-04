@@ -1,4 +1,4 @@
-import { mockStoreFactory, ReduxSagaMock, runSagaMock } from "../index";
+import { mockStoreFactory, ReduxSagaMock, runSagaMock } from "..";
 import testReducer from "./testReducer";
 import { watcher } from "./testSaga";
 import testStore from "./testStore";
@@ -19,11 +19,11 @@ describe("runSagaMock", () => {
         // Arrange
         const expected = true;
         let actual = false;
-        const mock: ReduxSagaMock = mockStoreFactory(testReducer, testStore);
+        mockStoreFactory(testReducer, testStore);
 
         try {
             // Act
-            const done = runSagaMock(null, watcher);
+            runSagaMock(null as any, watcher);
         } catch {
             actual = true;
         }

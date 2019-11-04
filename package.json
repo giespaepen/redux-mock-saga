@@ -1,6 +1,6 @@
 {
   "name": "redux-mock-saga",
-  "version": "0.1.11",
+  "version": "0.2.0",
   "description": "Mock library to thoroughly test redux-sagas",
   "main": "./lib/index.js",
   "typings": "./lib/index.d.ts",
@@ -13,7 +13,7 @@
     "build": "yarn tsc && yarn generate-flowtypes",
     "generate-flowtypes": "flowgen lib/index.d.ts -o flow-typed/index.flow.js",
     "prepublishOnly": "yarn build",
-    "test": "jest --config jest.config.json --no-cache && codecov -f coverage/*.json -t fbf0fd97-eaa0-4700-a62e-28ec14665604"
+    "test": "jest --config jest.config.js --no-cache && codecov -f coverage/*.json -t fbf0fd97-eaa0-4700-a62e-28ec14665604"
   },
   "keywords": [
     "redux-saga",
@@ -23,19 +23,19 @@
   "author": "Gie Spaepen <giespaepen@outlook.com>",
   "license": "MIT",
   "dependencies": {
-    "redux": "4.0.0",
-    "redux-saga": "^0.16.0"
+    "redux": "4.0.4",
+    "redux-saga": "^1.1.1"
   },
   "devDependencies": {
     "@types/enzyme": "^3.1.6",
-    "@types/jest": "^21.1.8",
+    "@types/jest": "^24.0.21",
     "@types/react": "^16.0.31",
     "codecov": "^3.0.0",
     "flowgen": "^1.2.0",
-    "jest": "^22.4.3",
-    "ts-jest": "^22.0.0",
-    "tslint": "^5.8.0",
-    "tslint-microsoft-contrib": "^5.0.1",
-    "typescript": "2.7"
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "tslint": "^6.0.0-beta0",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "typescript": "3.6.4"
   }
 }

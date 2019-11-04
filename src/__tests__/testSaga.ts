@@ -1,5 +1,4 @@
-import { takeEvery } from "redux-saga";
-import { fork, ForkEffect, select } from "redux-saga/effects";
+import { fork, ForkEffect, select, takeEvery } from "redux-saga/effects";
 
 export const ACTION: string = "ACTION";
 
