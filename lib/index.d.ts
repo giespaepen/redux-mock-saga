@@ -1,5 +1,5 @@
 import { Action, Store } from "redux";
-import { SagaMiddleware } from "redux-saga";
+import { SagaMiddleware, Task } from "redux-saga";
 export declare type ReduxSagaMock = {
     mockStore: Store<any>;
     mockSagaMiddleWare: SagaMiddleware<{}>;
@@ -25,7 +25,7 @@ export declare function createMockRootSaga(...sagas: any[]): any;
  * @param mock
  * @param sagas
  */
-export declare function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Promise<any>;
+export declare function runSagaMock(mock: ReduxSagaMock, ...sagas: any[]): Task;
 /**
  * Stop a saga mock by dispatching the END signal. Don't forget to await the promise returned
  * in runSagaMock.

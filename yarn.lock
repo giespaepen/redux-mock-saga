@@ -2978,7 +2978,7 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-redux-saga@^1.1.1:
+redux-saga@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.1.1.tgz#7e02879beb02c92030b5fbe746fd70e8bda97dfb"
   integrity sha512-guSnGJ/uEF8yL8Mn4aNa7HxRGCpVUALCkec9iTTD0fOhQqkF6bRQkBLeS+7/cAH3nFnr299bi/DOurTi1apcCA==
